@@ -45,6 +45,25 @@ var app = (function(){
 	}
 	
 	function _renderScores(data){
+		var tr = '',
+			tbody = $('#userlist tbody'),
+			// currentMonth = new Date().getMonth()+1;
+			currentMonth = 2;	//static till we get actual data in the database
+			
+		tbody.html('');
+		
+		for( var i=0,n = data[currentMonth].length; i<n; i++ ){
+			tr = 
+				'<tr data-score-index="'+i+'">\
+					<td>'+data[currentMonth][i].username+'</td>\
+					<td>'+data[currentMonth][i].gen_score+'%</td>\
+					<td class="action">\
+						<button type="button" class="btn-anal btn btn-primary btn-block" data-toggle="modal" data-target="#mdl_anal">Details</button>\
+					</td>\
+				</tr>';
+			
+			tbody.append(tr);
+		}
 	}
 	
 	return {
