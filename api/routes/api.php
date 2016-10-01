@@ -24,7 +24,7 @@
 			$score['placeholder2'] = $score_placeholder2;
 			$score['placeholder3'] = $score_placeholder3;
 			
-			$response['scores'][] = $score;
+			$response['scores'][$score_month][] = $score;
 		}
 		$stmt->close();
 		
