@@ -5,7 +5,7 @@
 body{
   #background-color: rgba(207, 207, 207, 1);
 }
-#panels .info{
+.panel .info{
   padding: 15px;
   font-size: 30px;
   text-align: center;
@@ -15,6 +15,12 @@ body{
 }
 #main{
   margin-top: 50px;
+}
+.status-improved{
+  background-color: rgba(161, 255, 153, 1);
+}
+.status-declined{
+  background-color: rgba(255, 156, 153, 1);
 }
 .text-insurance{
   color: rgba(52, 52, 52, 1);
