@@ -45,21 +45,23 @@
 	<link rel="stylesheet" type="text/css" href="css/themes/dsgV1.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/themes/jquery.mobile.icons.min.css" />
 	<link rel="stylesheet" type="text/css" href="js/jquery.mobile.structure-1.4.5.min.css" />
-	
+	<link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+	<link rel="stylesheet" href="css/asPieProgress.min.css">
 	
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-migrate-3.0.0.min.js"></script>
 	<script src="js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="js/jquery-asPieProgress.min.js"></script>
 
-	
+	<script src="js/my_functions.js"></script>
 	
 	<script src="phonegap.js"></script> 
 	<script type="text/javascript" charset="utf-8" src="cordova.js" ></script> 
-    <title>Hello World</title>
+    <title>DSG</title>
 	
 	<script>
 	
-	/*function init(){  
+	function init(){  
     document.addEventListener("deviceready",onDeviceReady, false);
 
 
@@ -74,34 +76,97 @@
 //navigator.notification.vibrate(1000);
 //alert(" cordova:"+device.cordova+"\n Dev model:"+device.model+"\n dev platform:"+device.platform+"\n uuid:"+device.uuid+"\n ver:"+device.version+"\n manufacturer:"+device.manufacturer+"\n isVirtual:"+device.isVirtual+"\n serial:"+device.serial);
 
-var push = PushNotification.init({ "android": {"senderID": "690384715438"},
-"ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
-
-push.on('registration', function(data) {
-console.log(data.registrationId);
-SetGcmId(data.registrationId,localStorage.getItem("user_id"),connection,device.platform,device.uuid);//apostolh ston server
-});
-
-push.on('notification', function(data) {
-console.log(data.message);
-alert(data.title+" Message: " +data.message);
-// data.title,
-// data.count,
-// data.sound,
-// data.image,
-// data.additionalData
-});
-
-push.on('error', function(e) {
-console.log(e.message);
-});
 				   }
-	*/
+	
 	</script>
 	
-	
+	  <style type="text/css">
+    body {
+      padding: 40px;
+    }
+    .pie_progress {
+      width: 160px;
+      margin: 10px auto;
+    }
+    @media all and (max-width: 768px) {
+      .pie_progress {
+        width: 80%;
+        max-width: 300px;
+      }
+    }
+  </style>
 </head>
 <body onload="init();">
+
+<script>
+$(document).bind( "pagebeforeshow", function( e, data ) {
+
+var page=$('body').pagecontainer('getActivePage').prop('id');
+
+
+
+if(page=="dashboard"){
+
+
+var color='';
+	if (localStorage.getItem("gen_score")>=70){
+		color='#3fb618';
+	}else if (localStorage.getItem("gen_score")<70&&localStorage.getItem("gen_score")>=40){
+		color='#ffc105';
+	}else{
+		color='#db0007';
+	}
+
+
+    jQuery(function($) {
+      $('#pie_progress').asPieProgress({
+        namespace: 'pie_progress',
+        goal: 100,
+        min: 0,
+        max: 100,
+        speed: 10,
+		barcolor: color,
+        easing: 'linear'
+      });
+	  });
+	  
+	  var arrowColor='';
+	if(localStorage.getItem("scoreUp")==true){
+	
+		$('#arrow').html("<span style=\"color:#3fb618\"><i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i></span>");
+		arrowColor="#3fb618";
+	}else{
+	
+		$('#arrow').html("<span style=\"color:#db0007\"><i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i></span>");
+		arrowColor='#db0007';
+	}
+	
+	    jQuery(function($) {
+      $('#pie_progress_change').asPieProgress({
+        namespace: 'pie_progress',
+        goal: 100,
+        min: 0,
+        max: 100,
+        speed: 10,
+		barcolor: arrowColor,
+        easing: 'linear'
+      });
+
+    });
+	
+	
+	setTimeout(function() {
+
+
+ $('#pie_progress').asPieProgress('go', localStorage.getItem("gen_score"));
+ 
+ $('#pie_progress_change').asPieProgress('go', localStorage.getItem("scoreChange"));
+}, 500);
+
+}
+
+});
+</script>
 
 <!-- ARXH LOGIN VIEW -->
 	<div data-role="page" id="login" data-theme="b" data-ajax="false">
@@ -112,47 +177,54 @@ console.log(e.message);
 			<div data-theme="b" data-form="ui-body-b" class="ui-body ui-body-b ui-corner-all">
 			
 			<label for="text-basic">Username:</label>
-			<input type="text" name="text-basic" id="text-basic" value="">
+			<input type="text" name="text-basic" id="username" value="">
 			
 			<label for="text-basic">Password:</label>
 			<input type="password" name="text-basic" id="text-basic" value="">
 
-			<a href="#dashboard" class="ui-shadow ui-btn ui-corner-all">Login</a>
+			<button class="ui-shadow ui-btn ui-corner-all" onclick="login()">Login</button>
+			<p id="errors" style="color:red"></p>
 		</div>
 		</div>
 	</div>
 <!-- TELOS LOGIN VIEW -->
 
-<!-- ARXH DASBOARD VIEW -->
+<!-- ARXH dashboard VIEW -->
 	<div data-role="page" id="dashboard" data-theme="a" data-ajax="false">
 	
 			<div data-role="header" data-position="inline">
-			<h1>Dashboard</h1>
+			<h1>dashboard</h1>
 		</div>
-		<div class="ui-content ui-page-theme-a" data-form="ui-page-theme-a" data-theme="a" role="main">
-			<div data-theme="a" data-form="ui-body-a" class="ui-body ui-body-a ui-corner-all">
-			<p>
+		<div class="ui-content ui-page-theme-b" data-form="ui-page-theme-b" data-theme="b" role="main">
+			<div data-theme="b" data-form="ui-body-ab" class="ui-body ui-body-b ui-corner-all">
+			<p id="dashboardText" style="text-align:center"></p>
 			
-    "rank": {
-        month: 'September',
-        year: 2016,
-        score: 78,
-        scoreUp: true,
-        scoreChange: '7%',
-        placeholder1: 88,
-        placeholder2: 67,
-        placeholder3: 73
-    },
-    "success": true
-}
-$('.month').text(response.rank.month);
-'http://dsg-hackathon.cloudapp.net/api/v1/user/stavros/rank/2'
-			</p>
+			
+			<div id="pie_progress" class="pie_progress" role="progressbar"  data-barsize="10">
+
+  <div class="pie_progress__number">0</div>
+
+  <div class="pie_progress__label">Score</div>
+
+</div>
+
+
+			<div id="pie_progress_change" class="pie_progress" role="progressbar"  data-barsize="10">
+
+  <div class="pie_progress__number">0</div>
+
+  <div class="pie_progress__label">change <div id="arrow"></div></div>
+
+</div>
+
+</script>
+			
 		</div>
 		</div>
 	
 	</div>
-<!-- TELOS DASBOARD VIEW -->
+<!-- TELOS dashboard VIEW -->
+
 	
 </body>
 
