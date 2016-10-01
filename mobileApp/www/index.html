@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> 
+	
+	    <link rel="stylesheet" type="text/css" href="css/index.css" />
+	-->
+
+
+	<link rel="stylesheet" type="text/css" href="css/themes/dsgV1.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" type="text/css" href="js/jquery.mobile.structure-1.4.5.min.css" />
+	
+	
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-migrate-3.0.0.min.js"></script>
+	<script src="js/jquery.mobile-1.4.5.min.js"></script>
+
+	
+	
+	<script src="phonegap.js"></script> 
+	<script type="text/javascript" charset="utf-8" src="cordova.js" ></script> 
+    <title>Hello World</title>
+	
+	<script>
+	
+	/*function init(){  
+    document.addEventListener("deviceready",onDeviceReady, false);
+
+
+
+
+}
+
+             function onDeviceReady(){
+                   //navigator.notification.alert("PhoneGap is working");
+				   
+//navigator.notification.beep(1);
+//navigator.notification.vibrate(1000);
+//alert(" cordova:"+device.cordova+"\n Dev model:"+device.model+"\n dev platform:"+device.platform+"\n uuid:"+device.uuid+"\n ver:"+device.version+"\n manufacturer:"+device.manufacturer+"\n isVirtual:"+device.isVirtual+"\n serial:"+device.serial);
+
+var push = PushNotification.init({ "android": {"senderID": "690384715438"},
+"ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
+
+push.on('registration', function(data) {
+console.log(data.registrationId);
+SetGcmId(data.registrationId,localStorage.getItem("user_id"),connection,device.platform,device.uuid);//apostolh ston server
+});
+
+push.on('notification', function(data) {
+console.log(data.message);
+alert(data.title+" Message: " +data.message);
+// data.title,
+// data.count,
+// data.sound,
+// data.image,
+// data.additionalData
+});
+
+push.on('error', function(e) {
+console.log(e.message);
+});
+				   }
+	*/
+	</script>
+	
+	
+</head>
+<body onload="init();">
+
+<!-- ARXH LOGIN VIEW -->
+	<div data-role="page" id="login" data-theme="b" data-ajax="false">
+		<div data-role="header" data-position="inline">
+			<h1>DSG</h1>
+		</div>
+		<div class="ui-content ui-page-theme-b" data-form="ui-page-theme-b" data-theme="b" role="main">
+			<div data-theme="b" data-form="ui-body-b" class="ui-body ui-body-b ui-corner-all">
+			
+			<label for="text-basic">Username:</label>
+			<input type="text" name="text-basic" id="text-basic" value="">
+			
+			<label for="text-basic">Password:</label>
+			<input type="password" name="text-basic" id="text-basic" value="">
+
+			<a href="#dashboard" class="ui-shadow ui-btn ui-corner-all">Login</a>
+		</div>
+		</div>
+	</div>
+<!-- TELOS LOGIN VIEW -->
+
+<!-- ARXH DASBOARD VIEW -->
+	<div data-role="page" id="dashboard" data-theme="a" data-ajax="false">
+	
+			<div data-role="header" data-position="inline">
+			<h1>Dashboard</h1>
+		</div>
+		<div class="ui-content ui-page-theme-a" data-form="ui-page-theme-a" data-theme="a" role="main">
+			<div data-theme="a" data-form="ui-body-a" class="ui-body ui-body-a ui-corner-all">
+			<p>
+			
+    "rank": {
+        month: 'September',
+        year: 2016,
+        score: 78,
+        scoreUp: true,
+        scoreChange: '7%',
+        placeholder1: 88,
+        placeholder2: 67,
+        placeholder3: 73
+    },
+    "success": true
+}
+$('.month').text(response.rank.month);
+'http://dsg-hackathon.cloudapp.net/api/v1/user/stavros/rank/2'
+			</p>
+		</div>
+		</div>
+	
+	</div>
+<!-- TELOS DASBOARD VIEW -->
+	
+</body>
+
+</html>
