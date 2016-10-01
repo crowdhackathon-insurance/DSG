@@ -10,11 +10,18 @@ var app = (function(){
 			case 'login-submit':
 				showApp();
 				break;
+			case 'dashboard-visible':
+				api.getAllScores();
+				break;
+			case 'scores-returned':
+				_renderScores(data);
+				break;
 		}
 	}
 	
 	function init(){
 		var apiOptions = {
+			
 			mediator: app.trigger,
 			apiUrl: settings.apiUrl
 		};
@@ -31,8 +38,13 @@ var app = (function(){
 	
 	function showApp(){
 		$('#login').fadeOut(function(){
-			$('#main').fadeIn();
+			$('#main').fadeIn(function(){
+				trigger('dashboard-visible');
+			});
 		});
+	}
+	
+	function _renderScores(data){
 	}
 	
 	return {
