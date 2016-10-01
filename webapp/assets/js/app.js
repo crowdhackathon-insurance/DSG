@@ -1,2 +1,9 @@
 $(function(){
+  $('#btn_login').on(
+		'click',
+		function(e){
+			$('#login').fadeOut();
+			$('#main').delay(500).fadeIn();
+		}
+	);
 });
