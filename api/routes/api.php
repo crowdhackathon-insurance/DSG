@@ -27,6 +27,9 @@
 			$response['scores'][$score_month][] = $score;
 		}
 		$stmt->close();
+		for($i=0; $i<count($response['scores']); $i++){
+			usort($response['scores'][$i+1], 'sortByScore');
+		}
 		
 		$app->response->setStatus(200);
 		$response['success'] = true;

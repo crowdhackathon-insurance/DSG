@@ -37,4 +37,8 @@
 		
 		return $rankObj;
 	}
+	
+	function sortByScore($a, $b) {
+		return $a['gen_score'] < $b['gen_score'];
+	}
 ?>
