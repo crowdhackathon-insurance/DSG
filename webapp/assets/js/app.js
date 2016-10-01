@@ -55,6 +55,7 @@ var app = (function(){
 		for( var i=0,n = data[currentMonth].length; i<n; i++ ){
 			tr = 
 				'<tr data-score-index="'+i+'">\
+					<td class="'+(i<3?'text-bold':'')+'">'+getTextPlace(i+1)+'</td>\
 					<td>'+data[currentMonth][i].username+'</td>\
 					<td>'+data[currentMonth][i].gen_score+'%</td>\
 					<td class="action">\
@@ -63,6 +64,18 @@ var app = (function(){
 				</tr>';
 			
 			tbody.append(tr);
+		}
+	}
+	
+	function getTextPlace(n){
+		if(n==1){
+			return n+'st';
+		} else if(n==2){
+			return n+'nd';
+		} else if(n==3){
+			return n+'rd';
+		} else {
+			return n+'th';
 		}
 	}
 	

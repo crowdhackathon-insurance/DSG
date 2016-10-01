@@ -48,6 +48,9 @@ body{
 .status-declined{
   background-color: rgba(255, 156, 153, 1);
 }
+.text-bold{
+  font-weight: bold;
+}
 .text-insurance{
   color: rgba(52, 52, 52, 1);
 }
