@@ -111,10 +111,13 @@ if(page=="dashboard"){
 var color='';
 	if (localStorage.getItem("gen_score")>=70){
 		color='#3fb618';
+		$('#scoreText').text('Καλός');
 	}else if (localStorage.getItem("gen_score")<70&&localStorage.getItem("gen_score")>=40){
 		color='#ffc105';
+		$('#scoreText').text('Μέτριος');
 	}else{
 		color='#db0007';
+		$('#scoreText').text('Kάτω από τη βάση');
 	}
 
 
@@ -135,10 +138,12 @@ var color='';
 	
 		$('#arrow').html("<span style=\"color:#3fb618\"><i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i></span>");
 		arrowColor="#3fb618";
+		$('#scoreChangeText').text('Αυξήθηκε');
 	}else{
 	
-		$('#arrow').html("<span style=\"color:#db0007\"><i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i></span>");
+		$('#arrow').html("<span style=\"color:#db0007 \"><i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i></span>");
 		arrowColor='#db0007';
+		$('#scoreChangeText').text('Μειώθηκε');
 	}
 	
 	    jQuery(function($) {
@@ -157,10 +162,12 @@ var color='';
 	
 	setTimeout(function() {
 
+	$('#rank').text(localStorage.getItem("rank"));
 
  $('#pie_progress').asPieProgress('go', localStorage.getItem("gen_score"));
  
- $('#pie_progress_change').asPieProgress('go', localStorage.getItem("scoreChange"));
+ $('#pie_progress_change').asPieProgress('go', '100%');
+ $('#scoreChange').html((localStorage.getItem("scoreUp")==true?"+"+localStorage.getItem("scoreChange"):"-"+localStorage.getItem("scoreChange")));
 }, 500);
 
 }
@@ -170,7 +177,7 @@ var color='';
 
 <!-- ARXH LOGIN VIEW -->
 	<div data-role="page" id="login" data-theme="b" data-ajax="false">
-		<div data-role="header" data-position="inline">
+		<div data-role="header" data-position="inline" >
 			<h1>DSG</h1>
 		</div>
 		<div class="ui-content ui-page-theme-b" data-form="ui-page-theme-b" data-theme="b" role="main">
@@ -182,7 +189,7 @@ var color='';
 			<label for="text-basic">Password:</label>
 			<input type="password" name="text-basic" id="text-basic" value="">
 
-			<button class="ui-shadow ui-btn ui-corner-all" onclick="login()">Login</button>
+			<button class="ui-shadow ui-btn ui-corner-all" onclick="login()"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</button>
 			<p id="errors" style="color:red"></p>
 		</div>
 		</div>
@@ -192,36 +199,59 @@ var color='';
 <!-- ARXH dashboard VIEW -->
 	<div data-role="page" id="dashboard" data-theme="a" data-ajax="false">
 	
-			<div data-role="header" data-position="inline">
-			<h1>dashboard</h1>
+			<div data-role="header" data-position="inline" style="padding-top:0px;">
+			 <h1><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</h1>
 		</div>
-		<div class="ui-content ui-page-theme-b" data-form="ui-page-theme-b" data-theme="b" role="main">
+		
+		<div class="ui-content ui-page-theme-b" data-form="ui-page-theme-b" data-theme="b">
 			<div data-theme="b" data-form="ui-body-ab" class="ui-body ui-body-b ui-corner-all">
-			<p id="dashboardText" style="text-align:center"></p>
 			
+			
+			
+			
+			<div class="ui-grid-a">
+  <div class="ui-block-a"><p id="dashboardText" style="text-align:center"></p></div>
+  <div class="ui-block-b" style="text-align:center;vertical-align:middle;">
+
+
+
+ <p>Το Rank σου <div class="fa fa-slack fa-2x" aria-hidden="true" style="display: inline;"> <span id="rank" > </span></div></p>
+
+  
+  </div>
+</div>
+			<p style="text-align:center">Γενικό σκορ του οδηγού...</p>
 			
 			<div id="pie_progress" class="pie_progress" role="progressbar"  data-barsize="10">
 
   <div class="pie_progress__number">0</div>
 
-  <div class="pie_progress__label">Score</div>
 
 </div>
+<p style="text-align:center"><b><span id="scoreText"></span></b></p>
 
-
-			<div id="pie_progress_change" class="pie_progress" role="progressbar"  data-barsize="10">
-
-  <div class="pie_progress__number">0</div>
-
-  <div class="pie_progress__label">change <div id="arrow"></div></div>
-
-</div>
-
-</script>
 			
 		</div>
 		</div>
-	
+
+	<div class="ui-content ui-page-theme-b" data-form="ui-page-theme-b" data-theme="b">
+		<div data-theme="b" data-form="ui-body-ab" class="ui-body ui-body-b ui-corner-all">
+		<p style="text-align:center">Το σκορ σας σε σχέση με τον προηγούμενο μήνα...</p>
+		
+		
+	<div id="pie_progress_change" class="pie_progress" role="progressbar"  data-barsize="10">
+
+  
+		<div class="pie_progress__content"><h1><span style="text-align:center" id="scoreChange">0</span></h1> <div id="arrow"></div></div>
+
+	</div>
+		<p style="text-align:center"><b><span id="scoreChangeText"></span></b></p>
+		</div>
+	</div>
+
+
+
+		
 	</div>
 <!-- TELOS dashboard VIEW -->
 
