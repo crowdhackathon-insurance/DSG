@@ -33,10 +33,11 @@
 		$response = json_encode($response, JSON_UNESCAPED_UNICODE);
 		$app->response->setBody($response);
 	});
-	
+
+	/**
+	*	GET USER RANK INFO FOR A USER FOR A GIVEN MONTH
+	**/
 	$app->get('/api/v1/users/:username/month/:month/rank', function($req_username, $req_month) use ($app, $db){
-		
-		
 		$app->response->setStatus(200);
 		$response['success'] = true;
 		$response['rank'] = getUserRankObject($db, $req_username, $req_month);
