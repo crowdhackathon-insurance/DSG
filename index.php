@@ -23,7 +23,7 @@
 	$db->set_charset("utf8");
 	
 	//API routing
-	require 'routes/api.php';
+	require 'api/routes/api.php';
 	
 	$app->get('/', function () use ($app){
 		$app->redirect('/webapp');
