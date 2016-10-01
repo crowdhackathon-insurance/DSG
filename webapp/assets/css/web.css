@@ -1,4 +1,21 @@
 @charset "UTF-8";
+.bg-insurance{
+  background-color: rgba(250, 175, 7, 1);
+}
 body{
   #background-color: rgba(207, 207, 207, 1);
+}
+#panels .info{
+  padding: 15px;
+  font-size: 30px;
+  text-align: center;
+}
+#login{
+  margin-top: 35px;
+}
+#main{
+  margin-top: 50px;
+}
+.text-insurance{
+  color: rgba(52, 52, 52, 1);
 }
