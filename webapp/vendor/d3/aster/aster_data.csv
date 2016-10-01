@@ -1,0 +1,6 @@
+"id","order","score","weight","color","label"
+"acc",1,80,1.5,"#62ff72","Acceleration"
+"aacc",1,78,1,"#10a41f","Average Acceleration"
+"brk",1,95,1.5,"#ff5c5c","Braking"
+"mspd",1,59,0.4,"#2559e2","Maximum Speed"
+"aspd",1,99,0.5,"#6989dd","Average Speed"
