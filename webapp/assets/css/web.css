@@ -19,6 +19,18 @@ body{
 #main{
   margin-top: 50px;
 }
+#mdl_anal .score{
+  overflow-y: hidden;
+  width: 160px;
+  height: 160px;
+  border: 0px;
+}
+#mdl_anal .chart{
+  overflow-y: hidden;
+  width: 376px;
+  height: 203px;
+  border: 0px;
+}
 .reward-panel{
   background-color: rgba(230, 230, 230, 1);
 }
