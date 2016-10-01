@@ -59,7 +59,7 @@ var app = (function(){
 					<td>'+data[currentMonth][i].username+'</td>\
 					<td>'+data[currentMonth][i].gen_score+'%</td>\
 					<td class="action">\
-						<button type="button" class="btn-anal btn btn-primary btn-block" data-toggle="modal" data-target="#mdl_anal">Details</button>\
+						<button type="button" class="btn-anal btn btn-default btn-block" data-toggle="modal" data-target="#mdl_anal">Details</button>\
 					</td>\
 				</tr>';
 			
