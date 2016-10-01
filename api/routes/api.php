@@ -4,7 +4,7 @@
 	/**
 	*	GET ALL SCORES
 	**/
-	$app->get('/api/v1/scores', function () use ($app, $db){
+	$app->get('/api/v1/scores/', function () use ($app, $db){
 		$stmt = $db->prepare("SELECT `id`,`username`,`year`,`month`,`gen_score`,`placeholder1`,`placeholder2`,`placeholder3` FROM `raw_scores` WHERE 1");
 		$stmt->execute();
 		
@@ -37,7 +37,7 @@
 	/**
 	*	GET USER RANK INFO FOR A USER FOR A GIVEN MONTH
 	**/
-	$app->get('/api/v1/users/:username/month/:month/rank', function($req_username, $req_month) use ($app, $db){
+	$app->get('/api/v1/users/:username/month/:month/rank/', function($req_username, $req_month) use ($app, $db){
 		$app->response->setStatus(200);
 		$response['success'] = true;
 		$response['rank'] = getUserRankObject($db, $req_username, $req_month);
