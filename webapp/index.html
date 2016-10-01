@@ -140,13 +140,11 @@
           </div><!-- #time_period.panel -->
           <div class="panel">
             <div class="bg-insurance info">
-              <strong>Available Offers</strong>: 10
-              <br>
-              <strong>Offer Requests</strong>: 2
+              <strong>Available Rewards</strong>: 10
             </div>
             <div class="button">
-              <a role="button" class="btn btn-default btn-lg btn-block">
-                Manage Offers
+              <a role="button" class="btn btn-default btn-lg btn-block" data-toggle="modal" data-target="#mdl_rewards">
+                Manage Rewards
               </a>
             </div>
           </div>
@@ -157,142 +155,318 @@
 
   <!-- Modals -->
   <div class="modal fade" id="mdl_anal" tabindex="-1" role="dialog" aria-labelledby="mdl_anal_label">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="mdl_anal_label">John Doe</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-8">
-            <legend>2016 Statistics</legend>
-            <table class="table table-bordered table-condensed">
-              <thead>
-                <tr>
-                  <th>Month</th>
-                  <th>Placeholder1</th>
-                  <th>Placeholder2</th>
-                  <th>Placeholder3</th>
-                  <th>Score</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="status-improved">
-                  <td>January</td>
-                  <td>33</td>
-                  <td>43</td>
-                  <td>82</td>
-                  <td>65%</td>
-                  <td><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></td>
-                </tr>
-                <tr class="status-improved">
-                  <td>January</td>
-                  <td>33</td>
-                  <td>43</td>
-                  <td>82</td>
-                  <td>65%</td>
-                  <td><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></td>
-                </tr>
-                <tr class="status-declined">
-                  <td>January</td>
-                  <td>33</td>
-                  <td>43</td>
-                  <td>82</td>
-                  <td>65%</td>
-                  <td><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></td>
-                </tr>
-                <tr class="status-improved">
-                  <td>January</td>
-                  <td>33</td>
-                  <td>43</td>
-                  <td>82</td>
-                  <td>65%</td>
-                  <td><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></td>
-                </tr>
-                <tr class="status-declined">
-                  <td>January</td>
-                  <td>33</td>
-                  <td>43</td>
-                  <td>82</td>
-                  <td>65%</td>
-                  <td><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></td>
-                </tr>
-                <tr class="status-declined">
-                  <td>January</td>
-                  <td>33</td>
-                  <td>43</td>
-                  <td>82</td>
-                  <td>65%</td>
-                  <td><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></td>
-                </tr>
-                <tr class="status-declined">
-                  <td>January</td>
-                  <td>33</td>
-                  <td>43</td>
-                  <td>82</td>
-                  <td>65%</td>
-                  <td><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></td>
-                </tr>
-                <tr class="status-improved">
-                  <td>January</td>
-                  <td>33</td>
-                  <td>43</td>
-                  <td>82</td>
-                  <td>65%</td>
-                  <td><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></td>
-                </tr>
-                <tr class="status-declined">
-                  <td>January</td>
-                  <td>33</td>
-                  <td>43</td>
-                  <td>82</td>
-                  <td>65%</td>
-                  <td><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></td>
-                </tr>
-                <tr class="status-declined">
-                  <td>January</td>
-                  <td>33</td>
-                  <td>43</td>
-                  <td>82</td>
-                  <td>65%</td>
-                  <td><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-md-4">
-            <div class="panel">
-              <div class="bg-insurance info">
-                <strong>Claimed Rewards</strong>: 1
-              </div>
-              <div class="button">
-                <a role="button" class="btn btn-default btn-lg btn-block">
-                  View Rewards
-                </a>
-              </div>
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="mdl_anal_label">John Doe</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-8">
+              <legend>2016 Statistics</legend>
+              <table class="table table-bordered table-condensed">
+                <thead>
+                  <tr>
+                    <th>Month</th>
+                    <th>Placeholder1</th>
+                    <th>Placeholder2</th>
+                    <th>Placeholder3</th>
+                    <th>Score</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="status-improved">
+                    <td>January</td>
+                    <td>33</td>
+                    <td>43</td>
+                    <td>82</td>
+                    <td>65%</td>
+                    <td><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></td>
+                  </tr>
+                  <tr class="status-improved">
+                    <td>January</td>
+                    <td>33</td>
+                    <td>43</td>
+                    <td>82</td>
+                    <td>65%</td>
+                    <td><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></td>
+                  </tr>
+                  <tr class="status-declined">
+                    <td>January</td>
+                    <td>33</td>
+                    <td>43</td>
+                    <td>82</td>
+                    <td>65%</td>
+                    <td><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></td>
+                  </tr>
+                  <tr class="status-improved">
+                    <td>January</td>
+                    <td>33</td>
+                    <td>43</td>
+                    <td>82</td>
+                    <td>65%</td>
+                    <td><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></td>
+                  </tr>
+                  <tr class="status-declined">
+                    <td>January</td>
+                    <td>33</td>
+                    <td>43</td>
+                    <td>82</td>
+                    <td>65%</td>
+                    <td><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></td>
+                  </tr>
+                  <tr class="status-declined">
+                    <td>January</td>
+                    <td>33</td>
+                    <td>43</td>
+                    <td>82</td>
+                    <td>65%</td>
+                    <td><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></td>
+                  </tr>
+                  <tr class="status-declined">
+                    <td>January</td>
+                    <td>33</td>
+                    <td>43</td>
+                    <td>82</td>
+                    <td>65%</td>
+                    <td><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></td>
+                  </tr>
+                  <tr class="status-improved">
+                    <td>January</td>
+                    <td>33</td>
+                    <td>43</td>
+                    <td>82</td>
+                    <td>65%</td>
+                    <td><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></td>
+                  </tr>
+                  <tr class="status-declined">
+                    <td>January</td>
+                    <td>33</td>
+                    <td>43</td>
+                    <td>82</td>
+                    <td>65%</td>
+                    <td><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></td>
+                  </tr>
+                  <tr class="status-declined">
+                    <td>January</td>
+                    <td>33</td>
+                    <td>43</td>
+                    <td>82</td>
+                    <td>65%</td>
+                    <td><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-
-            <div class="panel">
-              <div class="bg-danger info">
-                <strong>Support Requests</strong>: 1
+            <div class="col-md-4">
+              <div class="panel">
+                <div class="bg-insurance info">
+                  <strong>Claimed Rewards</strong>: 1
+                </div>
+                <div class="button">
+                  <a role="button" class="btn btn-default btn-lg btn-block">
+                    View Rewards
+                  </a>
+                </div>
               </div>
-              <div class="button">
-                <a role="button" class="btn btn-default btn-lg btn-block">
-                  View Requests
-                </a>
+
+              <div class="panel">
+                <div class="bg-danger info">
+                  <strong>Support Requests</strong>: 1
+                </div>
+                <div class="button">
+                  <a role="button" class="btn btn-default btn-lg btn-block">
+                    View Requests
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+  <div class="modal fade" id="mdl_rewards" tabindex="-1" role="dialog" aria-labelledby="mdl_rewards_label">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="mdl_rewards_label">Rewards</h4>
+        </div>
+        <div class="modal-body">
+          <div>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#rewards-available" aria-controls="rewards-available" role="tab" data-toggle="tab">
+                  Available Rewards
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#rewards-add" aria-controls="rewards-add" role="tab" data-toggle="tab">
+                  New Reward
+                </a>
+              </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="rewards-available">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="reward-panel">
+                      <a href="https://google.com" target="_blank">
+                        <img src="http://www.cebuappliancecenter.com/wp-content/uploads/2013/12/p-2674-40PX150-Front.png" class="img-responsive" />
+                      </a>
+                      <div class="rank">
+                        Rank 1
+                      </div>
+                      <div class="info">
+                        <div class="name">Product</div>
+                      </div>
+                      <div class="delete">
+                        <button class="btn btn-danger btn-sm btn-block">Remove Reward</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="reward-panel">
+                      <a href="https://google.com" target="_blank">
+                        <img src="http://www.cebuappliancecenter.com/wp-content/uploads/2013/12/p-2674-40PX150-Front.png" class="img-responsive" />
+                      </a>
+                      <div class="rank">
+                        Rank 1
+                      </div>
+                      <div class="info">
+                        <div class="name">Product</div>
+                      </div>
+                      <div class="delete">
+                        <button class="btn btn-danger btn-sm btn-block">Remove Reward</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="reward-panel">
+                      <a href="https://google.com" target="_blank">
+                        <img src="http://www.cebuappliancecenter.com/wp-content/uploads/2013/12/p-2674-40PX150-Front.png" class="img-responsive" />
+                      </a>
+                      <div class="rank">
+                        Rank 1
+                      </div>
+                      <div class="info">
+                        <div class="name">Product</div>
+                      </div>
+                      <div class="delete">
+                        <button class="btn btn-danger btn-sm btn-block">Remove Reward</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="reward-panel">
+                      <a href="https://google.com" target="_blank">
+                        <img src="http://www.cebuappliancecenter.com/wp-content/uploads/2013/12/p-2674-40PX150-Front.png" class="img-responsive" />
+                      </a>
+                      <div class="rank">
+                        Rank 1
+                      </div>
+                      <div class="info">
+                        <div class="name">Product</div>
+                      </div>
+                      <div class="delete">
+                        <button class="btn btn-danger btn-sm btn-block">Remove Reward</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="reward-panel">
+                      <a href="https://google.com" target="_blank">
+                        <img src="http://www.cebuappliancecenter.com/wp-content/uploads/2013/12/p-2674-40PX150-Front.png" class="img-responsive" />
+                      </a>
+                      <div class="rank">
+                        Rank 1
+                      </div>
+                      <div class="info">
+                        <div class="name">Product</div>
+                      </div>
+                      <div class="delete">
+                        <button class="btn btn-danger btn-sm btn-block">Remove Reward</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="reward-panel">
+                      <a href="https://google.com" target="_blank">
+                        <img src="http://www.cebuappliancecenter.com/wp-content/uploads/2013/12/p-2674-40PX150-Front.png" class="img-responsive" />
+                      </a>
+                      <div class="rank">
+                        Rank 1
+                      </div>
+                      <div class="info">
+                        <div class="name">Product</div>
+                      </div>
+                      <div class="delete">
+                        <button class="btn btn-danger btn-sm btn-block">Remove Reward</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="reward-panel">
+                      <a href="https://google.com" target="_blank">
+                        <img src="http://www.cebuappliancecenter.com/wp-content/uploads/2013/12/p-2674-40PX150-Front.png" class="img-responsive" />
+                      </a>
+                      <div class="rank">
+                        Rank 1
+                      </div>
+                      <div class="info">
+                        <div class="name">Product</div>
+                      </div>
+                      <div class="delete">
+                        <button class="btn btn-danger btn-sm btn-block">Remove Reward</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="rewards-add">
+                <div class="form">
+                  <div class="form-group">
+                    <label for="reward-name">Reward name:</label>
+                    <input type="text" name="reward-name" class="form-control" placeholder="Add a friendly name">
+                  </div>
+                  <div class="form-group">
+                    <label for="reward-thumb">Thumbnail URL:</label>
+                    <input type="text" name="reward-thumb" class="form-control" placeholder="Add a url">
+                  </div>
+                  <div class="form-group">
+                    <label for="reward-url">Product Page:</label>
+                    <input type="text" name="reward-url" class="form-control" placeholder="Add a url">
+                  </div>
+                  <div class="form-group">
+                    <label for="reward-rank">Rank:</label>
+                    <input type="text" name="reward-rank" class="form-control" placeholder="Add the rank this reward is for">
+                  </div>
+                    <div class="form-group">
+                      <a id="btn_login" class="btn btn-success">Save Reward</a>
+                    </div>
+                  </div
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Vendor Scripts -->
   <script type="text/javascript" src="vendor/js/jquery.min.js"></script>

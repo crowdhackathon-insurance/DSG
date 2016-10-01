@@ -19,6 +19,29 @@ body{
 #main{
   margin-top: 50px;
 }
+.reward-panel{
+  background-color: rgba(230, 230, 230, 1);
+}
+.reward-panel .info{
+  padding: 15px 0px;
+  text-align: center;
+  font-size: 20px;
+  background: rgba(45, 45, 45, 1);
+  color: rgba(230, 230, 230, 1);
+}
+.reward-panel .rank{
+  padding: 8px 0px;
+  text-align: center;
+  font-size: 18px;
+  background: rgba(240, 166, 22, 1);
+  color: rgba(28, 28, 28, 1);
+}
+#rewards-available .col-md-3{
+  padding: 15px;
+}
+#rewards-add{
+  padding-top: 30px;
+}
 .status-improved{
   background-color: rgba(161, 255, 153, 1);
 }
