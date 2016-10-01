@@ -1,9 +1,15 @@
 @charset "UTF-8";
+.action{
+  padding: 0px !important;
+}
 .bg-insurance{
   background-color: rgba(250, 175, 7, 1);
 }
 body{
   #background-color: rgba(207, 207, 207, 1);
+}
+.btn-anal{
+
 }
 .panel .info{
   padding: 15px;
