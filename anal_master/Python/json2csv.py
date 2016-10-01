@@ -6,7 +6,7 @@ with open('data_formatted.json') as data_file:
 
 csv_data = csv.writer(open("comma_sepa_values.csv", "wb+"))
 csv_data.writerow(["id", "vehicleID", "duration", "maxSpeed", "distance", "idleDuration", 
-											"avgSpeed", "score", "startTime", "stopTime"])
+				"avgSpeed", "score", "startTime", "stopTime"])
 
 for raw_data in raw_data:
     csv_data.writerow([raw_data["id"],
