@@ -139,7 +139,7 @@
               <a href="#"><i class="fa fa-3x fa-envelope" aria-hidden="true"></i></a>
             </div>
           </div>
-          <div class="row">
+          <!--div class="row">
             <div class="col-md-5">
               <iframe class="chart" src="vendor/d3/bar-chart/index.html" scrolling="no"></iframe>
             </div>
@@ -150,7 +150,15 @@
             <div class="col-md-3">
               <iframe class="score" src="vendor/d3/aster/index.html" scrolling="no"></iframe>
             </div>
-          </div>
+          </div-->
+		  <div class="row">
+				<div class="col-xs-6">
+					<canvas id="barsChart"></canvas>
+				</div>
+				<div class="col-xs-6">
+					<canvas id="polarChart"></canvas>
+				</div>
+		</div>
           <div class="row">
             <div class="col-md-12">
               <table class="table table-bordered table-condensed">
@@ -357,6 +365,8 @@
   <script type="text/javascript" src="vendor/js/jquery.min.js"></script>
   <script type="text/javascript" src="vendor/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="vendor/js/d3.min.js"></script>
+  
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
 
   <!-- App Scripts -->
   <script type="text/javascript" src="assets/js/app.js"></script>

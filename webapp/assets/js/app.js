@@ -27,6 +27,7 @@ var app = (function(){
 				break;
 			case 'user-detail-modal-show':
 				_renderUserDetailModal(data);
+				_renderChart(data);
 				break;
 			case 'rewards_modal_shown':
 				api.getRewards(data);
@@ -183,6 +184,87 @@ var app = (function(){
 			wrapper.append(tr);
 		}
 		
+	}
+	
+	function _renderChart(data){
+		var userScores = [],
+			gen_scores = [],
+			labels = [],
+			stability = [],
+			firstMonthAq = false;
+			
+		for( var i in allScoreData){
+		   if (allScoreData.hasOwnProperty(i)) {
+				for( var j=0; j<allScoreData[i].length; j++ ){
+					if(allScoreData[i][j].username == data.username){
+						gen_scores.push(allScoreData[i][j].gen_score);
+						stability.push(allScoreData[i][j].stability);
+						stability.push(allScoreData[i][j].stability);
+						labels.push(_numberToMonth(allScoreData[i][j].month));
+						
+						if(!firstMonthAq){
+							firstMonthAq = true;
+							userScores.push(allScoreData[i][j].stability);
+							userScores.push(allScoreData[i][j].score_range);
+							userScores.push(allScoreData[i][j].active_time);
+							userScores.push(allScoreData[i][j].score);
+						}
+					}
+				}
+		   }
+		}
+		
+		var ctx = document.getElementById("barsChart");
+		var barChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: labels,
+				datasets: [{
+					label: 'Score',
+					data: gen_scores,
+					backgroundColor: "rgba(75,192,192,0.4)",
+					borderColor: "rgba(75,192,192,1)",
+					borderWidth: 1
+				},
+				{
+					label: 'Stability',
+					data: stability,
+					backgroundColor: "rgba(5,3,192,0.4)",
+					borderColor: "rgba(15,3,192,1)",
+					borderWidth: 1
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						}
+					}]
+				}
+			}
+		});
+		
+		ctx = document.getElementById("polarChart");
+		var polarChart = new Chart(ctx, {
+			type: 'polarArea',
+			data: {
+				labels: ['Stability', 'Score rng', 'Active time', 'Score'],
+				datasets: [{
+					label: 'Score',
+					data: userScores,
+					backgroundColor: [
+						"#FF6384",
+						"#4BC0C0",
+						"#FFCE56",
+						"#E7E9ED",
+						"#36A2EB"
+					],
+					// borderColor: "rgba(75,192,192,1)",
+					borderWidth: 1
+				}]
+			}
+		});
 	}
 	
 	function _saveScores(data){
