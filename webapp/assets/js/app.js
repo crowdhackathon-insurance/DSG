@@ -28,6 +28,12 @@ var app = (function(){
 			case 'user-detail-modal-show':
 				_renderUserDetailModal(data);
 				break;
+			case 'rewards_modal_shown':
+				api.getRewards(data);
+				break;
+			case 'rewards-returned':
+				_renderRewards(data);
+				break;
 		}
 	}
 	
@@ -62,6 +68,10 @@ var app = (function(){
 		
 		$('#goToCurrentMonth').on('click', function(){
 			trigger('month_selection_current_month');
+		});
+		
+		$('#mdl_rewards').on('show.bs.modal', function(e){
+			trigger('rewards_modal_shown');
 		});
 	}
 	
@@ -146,6 +156,33 @@ var app = (function(){
 			}
 			tbody.append(tr);
 		}
+	}
+	
+	function _renderRewards(data){
+		var wrapper = $('#mdl_rewards #rewards-available .row'),
+			tr = '';
+			
+		wrapper.html('');
+		
+		for(var i=0, n=data.length; i<n; i++){
+			tr = 
+				 ' <div class="col-md-3">\
+                    <div class="reward-panel">\
+                      <a href="'+data[i].url+'" target="_blank">\
+                        <img src="'+data[i].thumb+'" class="img-responsive" />\
+                      </a>\
+                      <div class="rank">'+data[i].rank+'</div>\
+                      <div class="info">\
+                        <div class="name">'+data[i].name+'</div>\
+                      </div>\
+                      <div class="delete">\
+                        <button class="btn btn-danger btn-sm btn-block">Remove Reward</button>\
+                      </div>\
+                    </div>\
+                  </div>';
+			wrapper.append(tr);
+		}
+		
 	}
 	
 	function _saveScores(data){

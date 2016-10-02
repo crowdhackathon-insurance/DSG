@@ -22,9 +22,26 @@ var api = (function(){
 			}
 		});
 	}
+	
+	function getRewards(){
+		$.ajax({
+			type: 'GET',
+			url: _apiUrl+"/rewards/",
+			headers: {
+				"Accept":"application/json"
+			},
+			success: function (response){
+				_trigger('rewards-returned', response.rewards);
+			},
+			error: function (response){
+				console.log('getRewards request failed :(');
+			}
+		});
+	}
 
 	return {
 		init: init,
-		getAllScores: getAllScores
+		getAllScores: getAllScores,
+		getRewards: getRewards
 	};
 })();
