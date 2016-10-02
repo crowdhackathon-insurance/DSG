@@ -87,6 +87,12 @@ save cleaned_data_with_features.mat
 clearvars -except normz_diff normz_score normz_ratio normz_range driver_ids months_to_scan
 save __feats_only__.mat
 
+for i = 1:length(driver_ids)
+    for j = 1:length(months_to_scan)
+        month{j}(i,:) = [normz_diff(i,j) ,normz_range(i,j), normz_ratio(i,j), normz_score(i,j)];
+    end
+end
+
 final_to_out = [month{1}; month{2}; month{3}; month{4}; month{5}; month{6}; month{7}; month{8}];
 
 k = 1;
