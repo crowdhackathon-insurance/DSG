@@ -13,6 +13,14 @@
 /* Globals */
 /* Font
 -----------------------------------------------------------------------------------------------------------*/
+.appname{
+	
+	font-family: 'Righteous', cursive;
+}
+.wrap {
+    white-space: normal !important;
+}
+
 html {
 	font-size: 100%;
 }

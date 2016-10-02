@@ -105,3 +105,7 @@ function rewards(){
     });
 	
 }
+
+function epikinonia(){
+navigator.notification.alert("Θα σε καλέσουμε άμεσα");
+}

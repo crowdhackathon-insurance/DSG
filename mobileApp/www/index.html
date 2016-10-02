@@ -41,7 +41,7 @@
 	    <link rel="stylesheet" type="text/css" href="css/index.css" />
 	-->
 
-
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Righteous" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/themes/dsgV1.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/themes/jquery.mobile.icons.min.css" />
 	<link rel="stylesheet" type="text/css" href="js/jquery.mobile.structure-1.4.5.min.css" />
@@ -223,7 +223,7 @@ var color3='';
 	}
 	
 	
-	$("#sumboules3").html('<ul data-role="listview"><li><p>Η σταθερότητα σου χαρακτηρίζεται ως:<b>'+s1+'</b></p><p>Με σκορ:<b>'+localStorage.getItem("stability")+'</b></p></li><li><p>Η επιτάχυνση σου και το φρενάρισμα χαρακτηρίζεται ως:<b>'+s2+'</b></p><p>Με σκορ:<b>'+localStorage.getItem("score")+'</b></p></li><li><p>Η χρήση του αυτοκινήτου χαρακτηρίζεται ως:<b>'+s3+'</b></p><p>Με σκορ:<b>'+localStorage.getItem("active_time")+'</b></p></li></ul>');
+	$("#sumboules3").html('<ul data-role="listview"><li><p class="wrap">Η σταθερότητα σου χαρακτηρίζεται ως:<b>'+s1+'</b></p><p class="wrap">Με σκορ:<b>'+localStorage.getItem("stability")+'</b></p></li><li><p class="wrap">Η επιτάχυνση σου και το φρενάρισμα χαρακτηρίζεται ως:<b>'+s2+'</b></p><p class="wrap">Με σκορ:<b>'+localStorage.getItem("score")+'</b></p></li><li><p class="wrap">Η χρήση του αυτοκινήτου χαρακτηρίζεται ως:<b>'+s3+'</b></p><p class="wrap">Με σκορ:<b>'+localStorage.getItem("active_time")+'</b></p></li></ul>');
 
 
 }
@@ -234,7 +234,7 @@ var color3='';
 <!-- ARXH LOGIN VIEW -->
 	<div data-role="page" id="login" data-theme="b" data-ajax="false">
 		<div data-role="header" data-position="inline" >
-			<h1>DSG</h1>
+			<h1 class="appname">DaaM</h1>
 		</div>
 		<div class="ui-content ui-page-theme-b" data-form="ui-page-theme-b" data-theme="b" role="main">
 			<div data-theme="b" data-form="ui-body-b" class="ui-body ui-body-b ui-corner-all">
@@ -263,10 +263,10 @@ var color3='';
 			
 			
 			
-			 <h1><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</h1>
+			 <h1 class="appname"><i class="fa fa-tachometer" aria-hidden="true"></i> DaaM</h1>
 
 			 
-			 		<a href="#act" data-rel="popup" data-position-to="window" data-transition="pop" data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" class="ui-btn ui-icon-alert ui-btn-icon-left ui-shadow ui-corner-all">Ενέργεια</a>
+			 		<button data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" class="ui-btn ui-icon-alert ui-btn-icon-left ui-shadow ui-corner-all" onclick="epikinonia()" style="height:80%"></button>
 		</div>
 		<!-- ARXH MENU  -->
 		<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-dismissible="true" data-theme="c">
@@ -358,7 +358,7 @@ var color3='';
 			 <h1>Συμβόλαια</h1>
 
 			 
-			 		<a href="#act" data-rel="popup" data-position-to="window" data-transition="pop" data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" class="ui-btn ui-icon-alert ui-btn-icon-left ui-shadow ui-corner-all">Ενέργεια</a>
+			 		<button data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" class="ui-btn ui-icon-alert ui-btn-icon-left ui-shadow ui-corner-all" onclick="epikinonia()">Ενέργεια</button>
 		</div>
 		<!-- ARXH MENU  -->
 		<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-dismissible="true" data-theme="c">
@@ -411,7 +411,7 @@ var color3='';
 			 <h1>Συμβουλές</h1>
 
 			 
-			 		<a href="#act" data-rel="popup" data-position-to="window" data-transition="pop" data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" class="ui-btn ui-icon-alert ui-btn-icon-left ui-shadow ui-corner-all">Ενέργεια</a>
+			 		<button data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" class="ui-btn ui-icon-alert ui-btn-icon-left ui-shadow ui-corner-all" onclick="epikinonia()">Ενέργεια</button>
 		</div>
 		<!-- ARXH MENU  -->
 		<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-dismissible="true" data-theme="c">
@@ -460,7 +460,7 @@ var color3='';
 			 <h1>Rewards</h1>
 
 			 
-			 		<a href="#act" data-rel="popup" data-position-to="window" data-transition="pop" data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" class="ui-btn ui-icon-alert ui-btn-icon-left ui-shadow ui-corner-all">Ενέργεια</a>
+			 		<button data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" class="ui-btn ui-icon-alert ui-btn-icon-left ui-shadow ui-corner-all" onclick="epikinonia()">Ενέργεια</button>
 		</div>
 		<!-- ARXH MENU  -->
 		<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-dismissible="true" data-theme="c">
