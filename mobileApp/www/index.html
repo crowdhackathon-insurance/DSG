@@ -94,16 +94,27 @@
         max-width: 300px;
       }
     }
+	
+	    body {
+      padding: 40px;
+    }
+    .pie_progress_sum {
+      width: 160px;
+      margin: 10px auto;
+    }
+    @media all and (max-width: 768px) {
+      .pie_progress_sum {
+        width: 80%;
+        max-width: 300px;
+      }
+    }
   </style>
 </head>
 <body onload="init();">
 
 <script>
 $(document).bind( "pagebeforeshow", function( e, data ) {
-
 var page=$('body').pagecontainer('getActivePage').prop('id');
-
-
 
 if(page=="dashboard"){
 
@@ -136,12 +147,12 @@ var color='';
 	  var arrowColor='';
 	if(localStorage.getItem("scoreUp")==true){
 	
-		$('#arrow').html("<span style=\"color:#3fb618\"><i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i></span>");
+		$('#arrow').html("<span style=\"color:#3fb618\"><i class=\"fa fa-long-arrow-up fa-1x\" aria-hidden=\"true\"></i></span>");
 		arrowColor="#3fb618";
 		$('#scoreChangeText').text('Αυξήθηκε');
 	}else{
 	
-		$('#arrow').html("<span style=\"color:#db0007 \"><i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i></span>");
+		$('#arrow').html("<span style=\"color:#db0007 \"><i class=\"fa fa-long-arrow-down fa-1x\" aria-hidden=\"true\"></i></span>");
 		arrowColor='#db0007';
 		$('#scoreChangeText').text('Μειώθηκε');
 	}
@@ -163,12 +174,57 @@ var color='';
 	setTimeout(function() {
 
 	$('#rank').text(localStorage.getItem("rank"));
+	$('#users').text(localStorage.getItem("users"));
 
  $('#pie_progress').asPieProgress('go', localStorage.getItem("gen_score"));
  
  $('#pie_progress_change').asPieProgress('go', '100%');
  $('#scoreChange').html((localStorage.getItem("scoreUp")==true?"+"+localStorage.getItem("scoreChange"):"-"+localStorage.getItem("scoreChange")));
 }, 500);
+
+
+rewards();
+
+//gia tis sumboules
+var color1='',s1="",s2="",s3="";
+	if (localStorage.getItem("stability")>=70){
+		color1='#3fb618';
+		s1='Αρκετά σταθερή οδήγηση';
+	}else if (localStorage.getItem("stability")<70&&localStorage.getItem("stability")>=50){
+		color1='#ffc105';
+		s1='Σχεδόν σταθερή οδήγηση';
+	}else{
+		color1='#db0007';
+		s1='Ανάγκη σταθερότερης οδήγησης';
+	}
+	
+var color2='';
+	if (localStorage.getItem("score")>=70){
+		color2='#3fb618';
+		s2='Πολύ καλο φρενάρισμα-επιτάχυνση';
+	}else if (localStorage.getItem("score")<70&&localStorage.getItem("score")>=50){
+		color2='#ffc105';
+		s2='Μέτριο φρενάρισμα-επιτάχυνση';
+	}else{
+		color2='#db0007';
+		s2='Ανάγκη μείωσης τις απότομης οδήγησης (φρεναρίσματος-επιτάχυνσης)';
+	}
+	
+var color3='';
+	if (localStorage.getItem("active_time")>=70){
+		color3='#3fb618';
+		s3='Λίγες στάσεις';
+	}else if (localStorage.getItem("active_time")<70&&localStorage.getItem("active_time")>=50){
+		color3='#ffc105';
+		s3='Συχνές στάσεις';
+	}else{
+		color3='#db0007';
+		s3='Πολύ συχνές στάσεις';
+	}
+	
+	
+	$("#sumboules3").html('<ul data-role="listview"><li><p>Η σταθερότητα σου χαρακτηρίζεται ως:<b>'+s1+'</b></p><p>Με σκορ:<b>'+localStorage.getItem("stability")+'</b></p></li><li><p>Η επιτάχυνση σου και το φρενάρισμα χαρακτηρίζεται ως:<b>'+s2+'</b></p><p>Με σκορ:<b>'+localStorage.getItem("score")+'</b></p></li><li><p>Η χρήση του αυτοκινήτου χαρακτηρίζεται ως:<b>'+s3+'</b></p><p>Με σκορ:<b>'+localStorage.getItem("active_time")+'</b></p></li></ul>');
+
 
 }
 
@@ -196,12 +252,49 @@ var color='';
 	</div>
 <!-- TELOS LOGIN VIEW -->
 
+
 <!-- ARXH dashboard VIEW -->
 	<div data-role="page" id="dashboard" data-theme="a" data-ajax="false">
 	
 			<div data-role="header" data-position="inline" style="padding-top:0px;">
+			
+			<a href="#leftpanel3" data-role="button" data-inline="true" data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" class="ui-btn ui-shadow ui-btn-corner-all"><span class="ui-btn-inner"><i class="fa fa-bars" aria-hidden="true"></i></span></a>
+			
+			
+			
+			
 			 <h1><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</h1>
+
+			 
+			 		<a href="#act" data-rel="popup" data-position-to="window" data-transition="pop" data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" class="ui-btn ui-icon-alert ui-btn-icon-left ui-shadow ui-corner-all">Ενέργεια</a>
 		</div>
+		<!-- ARXH MENU  -->
+		<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-dismissible="true" data-theme="c">
+			
+            <ul data-role="listview">
+	<li data-icon="home"><a href="#dashboard">Αρχική</a></li>
+	<li data-icon="edit"><a href="#contract">Προτεινόμενα Συμβόλαια</a></li>
+    <li data-icon="star"><a href="#rewards">Available Rewards</a><span class="ui-li-count" id="rewardsCount"></span></li>
+    <li data-icon="info"><a href="#sunmboules">Συμβουλές</a></li>
+	<li data-icon="mail"><a href="#contact">Επικοινωνία</a></li>
+	<li data-icon="power"><a href="#" onclick="logout()">Έξοδος</a></li>
+</ul>
+		</div><!-- TELOS MENU -->
+		
+		<!-- ARXH POPUP MENU -->
+		<div data-role="popup" id="act" data-overlay-theme="a" data-theme="a" style="max-width:400px;">
+    <div data-role="header" data-theme="a">
+    <h1>Επιλογή ενέργειας</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <h3 class="ui-title">Επιλέξτε να σας καλέσουν στο τηλέφωνο η αλλιώς καλέστε εσείς</h3>
+        <a href="#" data-icon="phone" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back">Κάλεσε</a>
+        <a href="#" data-icon="forward" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back" data-transition="flow">Kαλέστε με</a>
+    </div>
+</div>
+<!-- TELOS POPUP MENU -->
+
+
 		
 		<div class="ui-content ui-page-theme-b" data-form="ui-page-theme-b" data-theme="b">
 			<div data-theme="b" data-form="ui-body-ab" class="ui-body ui-body-b ui-corner-all">
@@ -215,7 +308,7 @@ var color='';
 
 
 
- <p>Το Rank σου <div class="fa fa-slack fa-2x" aria-hidden="true" style="display: inline;"> <span id="rank" > </span></div></p>
+ <p>Το Rank σου <div class="fa fa-slack fa-2x" aria-hidden="true" style="display: inline;"> <span id="rank" > </span> </div></p>
 
   
   </div>
@@ -242,20 +335,250 @@ var color='';
 	<div id="pie_progress_change" class="pie_progress" role="progressbar"  data-barsize="10">
 
   
-		<div class="pie_progress__content"><h1><span style="text-align:center" id="scoreChange">0</span></h1> <div id="arrow"></div></div>
+		<div class="pie_progress__content"><h1><span style="text-align:center;display: inline;" id="scoreChange">0</span> <div id="arrow" style="display: inline;"></div></h1></div>
 
 	</div>
 		<p style="text-align:center"><b><span id="scoreChangeText"></span></b></p>
 		</div>
-	</div>
-
-
-
 		
+		</div>
 	</div>
 <!-- TELOS dashboard VIEW -->
 
+<!-- ARXH CONTRACT VIEW -->
+	<div data-role="page" id="contract" data-theme="a" >
 	
+			<div data-role="header" data-position="inline" style="padding-top:0px;">
+			
+			<a href="#leftpanel3" data-role="button" data-inline="true" data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" class="ui-btn ui-shadow ui-btn-corner-all"><span class="ui-btn-inner"><i class="fa fa-bars" aria-hidden="true"></i></span></a>
+			
+			
+			
+			
+			 <h1>Συμβόλαια</h1>
+
+			 
+			 		<a href="#act" data-rel="popup" data-position-to="window" data-transition="pop" data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" class="ui-btn ui-icon-alert ui-btn-icon-left ui-shadow ui-corner-all">Ενέργεια</a>
+		</div>
+		<!-- ARXH MENU  -->
+		<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-dismissible="true" data-theme="c">
+			
+            <ul data-role="listview">
+	<li data-icon="home"><a href="#dashboard">Αρχική</a></li>
+	<li data-icon="edit"><a href="#contract">Προτεινόμενα Συμβόλαια</a></li>
+    <li data-icon="star"><a href="#rewards">Available Rewards</a><span class="ui-li-count" id="rewardsCount"></span></li>
+    <li data-icon="info"><a href="#sunmboules">Συμβουλές</a></li>
+	<li data-icon="mail"><a href="#contact">Επικοινωνία</a></li>
+	<li data-icon="power"><a href="#" onclick="logout()">Έξοδος</a></li>
+</ul>
+		</div><!-- TELOS MENU -->
+		
+		<!-- ARXH POPUP MENU -->
+		<div data-role="popup" id="act" data-overlay-theme="a" data-theme="a" style="max-width:400px;">
+    <div data-role="header" data-theme="a">
+    <h1>Επιλογή ενέργειας</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <h3 class="ui-title">Επιλέξτε να σας καλέσουν στο τηλέφωνο η αλλιώς καλέστε εσείς</h3>
+        <a href="#" data-icon="phone" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back">Κάλεσε</a>
+        <a href="#" data-icon="forward" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back" data-transition="flow">Kαλέστε με</a>
+    </div>
+</div>
+<!-- TELOS POPUP MENU -->
+
+<ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-shadow">
+					<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="a" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-thumb ui-first-child ui-btn-up-b"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a href="#" class="ui-link-inherit" style="text-decoration: none;">
+						<img src="http://www.topontiki.gr/photos/interamerica1410794999.jpg" class="ui-li-thumb" style="height:100%">
+						<h1 style="color:#343434"><b>Interamerican</b></h1>
+						<p  style="color:#343434"><b>Έχουμε προσαρμόσει το συμβόλαιο ασφάλισης στα μέτρα σας σύμφωνα με τα στατιστικά σας</b></p></a>
+					</div><span class="ui-icon ui-icon-carat-r ui-btn-icon-right"></span></div></li>
+				</ul>
+
+
+</div>
+<!-- TELOS CONTRACT VIEW -->
+
+<!-- ARXH SUMBOULES VIEW -->
+	<div data-role="page" id="sunmboules" data-theme="a" >
+	
+			<div data-role="header" data-position="inline" style="padding-top:0px;">
+			
+			<a href="#leftpanel3" data-role="button" data-inline="true" data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" class="ui-btn ui-shadow ui-btn-corner-all"><span class="ui-btn-inner"><i class="fa fa-bars" aria-hidden="true"></i></span></a>
+			
+			
+			
+			
+			 <h1>Συμβουλές</h1>
+
+			 
+			 		<a href="#act" data-rel="popup" data-position-to="window" data-transition="pop" data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" class="ui-btn ui-icon-alert ui-btn-icon-left ui-shadow ui-corner-all">Ενέργεια</a>
+		</div>
+		<!-- ARXH MENU  -->
+		<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-dismissible="true" data-theme="c">
+			
+            <ul data-role="listview">
+	<li data-icon="home"><a href="#dashboard">Αρχική</a></li>
+	<li data-icon="edit"><a href="#contract">Προτεινόμενα Συμβόλαια</a></li>
+    <li data-icon="star"><a href="#rewards">Available Rewards</a><span class="ui-li-count" id="rewardsCount"></span></li>
+    <li data-icon="info"><a href="#sunmboules">Συμβουλές</a></li>
+	<li data-icon="mail"><a href="#contact">Επικοινωνία</a></li>
+	<li data-icon="power"><a href="#" onclick="logout()">Έξοδος</a></li>
+</ul>
+		</div><!-- TELOS MENU -->
+		
+		<!-- ARXH POPUP MENU -->
+		<div data-role="popup" id="act" data-overlay-theme="a" data-theme="a" style="max-width:400px;">
+    <div data-role="header" data-theme="a">
+    <h1>Επιλογή ενέργειας</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <h3 class="ui-title">Επιλέξτε να σας καλέσουν στο τηλέφωνο η αλλιώς καλέστε εσείς</h3>
+        <a href="#" data-icon="phone" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back">Κάλεσε</a>
+        <a href="#" data-icon="forward" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back" data-transition="flow">Kαλέστε με</a>
+    </div>
+</div>
+<!-- TELOS POPUP MENU -->
+
+		<div class="ui-content ui-page-theme-b" data-form="ui-page-theme-b" data-theme="b"><div data-theme="b" data-form="ui-body-ab" class="ui-body ui-body-b ui-corner-all">
+		
+		<div id="sumboules3"></div>
+
+		</div></div>
+
+</div>
+
+<!-- ARXH REWARDS VIEW -->
+	<div data-role="page" id="rewards" data-theme="a">
+	
+			<div data-role="header" data-position="inline" style="padding-top:0px;">
+			
+			<a href="#leftpanel3" data-role="button" data-inline="true" data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" class="ui-btn ui-shadow ui-btn-corner-all"><span class="ui-btn-inner"><i class="fa fa-bars" aria-hidden="true"></i></span></a>
+			
+			
+			
+			
+			 <h1>Rewards</h1>
+
+			 
+			 		<a href="#act" data-rel="popup" data-position-to="window" data-transition="pop" data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" class="ui-btn ui-icon-alert ui-btn-icon-left ui-shadow ui-corner-all">Ενέργεια</a>
+		</div>
+		<!-- ARXH MENU  -->
+		<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-dismissible="true" data-theme="c">
+			
+            <ul data-role="listview">
+	<li data-icon="home"><a href="#dashboard">Αρχική</a></li>
+	<li data-icon="edit"><a href="#contract">Προτεινόμενα Συμβόλαια</a></li>
+    <li data-icon="star"><a href="#rewards">Available Rewards</a><span class="ui-li-count" id="rewardsCount"></span></li>
+    <li data-icon="info"><a href="#sunmboules">Συμβουλές</a></li>
+	<li data-icon="mail"><a href="#contact">Επικοινωνία</a></li>
+	<li data-icon="power"><a href="#" onclick="logout()">Έξοδος</a></li>
+</ul>
+		</div><!-- TELOS MENU -->
+		
+		<!-- ARXH POPUP MENU -->
+		<div data-role="popup" id="act" data-overlay-theme="a" data-theme="a" style="max-width:400px;">
+    <div data-role="header" data-theme="a">
+    <h1>Επιλογή ενέργειας</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <h3 class="ui-title">Επιλέξτε να σας καλέσουν στο τηλέφωνο η αλλιώς καλέστε εσείς</h3>
+        <a href="#" data-icon="phone" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back">Κάλεσε</a>
+        <a href="#" data-icon="forward" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back" data-transition="flow">Kαλέστε με</a>
+    </div>
+</div>
+<!-- TELOS POPUP MENU -->
+
+
+		<div class="ui-content ui-page-theme-b" data-form="ui-page-theme-b" data-theme="b"><div data-theme="b" data-form="ui-body-ab" class="ui-body ui-body-b ui-corner-all">
+		<ul data-role="listview">
+		<div id="getRewards"></div>
+		</ul>
+		</div></div>
+
+
+</div>
+<!-- TELOS REWARD VIEW -->
+
+<!-- ARXH CONTACT VIEW -->
+	<div data-role="page" id="contact" data-theme="a">
+	
+			<div data-role="header" data-position="inline" style="padding-top:0px;">
+			
+			<a href="#leftpanel3" data-role="button" data-inline="true" data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" class="ui-btn ui-shadow ui-btn-corner-all"><span class="ui-btn-inner"><i class="fa fa-bars" aria-hidden="true"></i></span></a>
+			
+			
+			
+			
+			 <h1>Contact</h1>
+
+			 
+			 		<a href="#act" data-rel="popup" data-position-to="window" data-transition="pop" data-mini="true" data-corners="true" data-shadow="true" data-iconshadow="true" class="ui-btn ui-icon-alert ui-btn-icon-left ui-shadow ui-corner-all">Alert</a>
+		</div>
+		
+	<div class="ui-content ui-page-theme-b" data-form="ui-page-theme-b" data-theme="b">
+		<div data-theme="b" data-form="ui-body-ab" class="ui-body ui-body-b ui-corner-all">
+		
+<p>Συμπληρώστε όλα τα πεδία της παρακάτω φόρμας για να μας στείλετε email. Σας ευχαριστούμε.</p>
+
+
+			<div class="ui-grid-a">
+  <div class="ui-block-a" style="text-align:center;vertical-align:middle;">		<label for="text-basic">Όνομα:</label>
+<input type="text" name="text-basic" id="text-basic" value=""> </div>
+  <div class="ui-block-b" style="text-align:center;vertical-align:middle;">
+
+  		<label for="text-basic">Επώνυμο:</label>
+<input type="text" name="text-basic" id="text-basic" value="">
+  </div>
+</div>
+
+			<div class="ui-grid-b">
+  <div class="ui-block-a" style="text-align:center;vertical-align:middle;">
+  <label for="text-basic">Διεύθυνση:</label>
+<input type="text" name="text-basic" id="text-basic" value=""> </div>
+  <div class="ui-block-b" style="text-align:center;vertical-align:middle;">
+
+  		<label for="text-basic">Πόλη:</label>
+<input type="text" name="text-basic" id="text-basic" value="">
+  </div>
+</div>
+
+  		<label for="text-basic">Τ.Κ.:</label>
+<input type="text" name="text-basic" id="text-basic" value="">
+		
+			<div class="ui-grid-c">
+  <div class="ui-block-a" style="text-align:center;vertical-align:middle;">		<label for="text-basic">Τηλέφωνο:</label>
+<input type="text" name="text-basic" id="text-basic" value=""> </div>
+  <div class="ui-block-b" style="text-align:center;vertical-align:middle;">
+
+  		<label for="text-basic">E-Mail:</label>
+<input type="text" name="text-basic" id="text-basic" value="">
+  </div>
+</div>
+
+  		<label for="text-basic">Κείμενο:</label>
+<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+
+<button class="ui-shadow ui-btn ui-corner-all">Αποστολή</button>
+		
+		</div>
+		</div>
+		
+				<!-- ARXH MENU  -->
+		<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-dismissible="true" data-theme="c">
+			
+            <ul data-role="listview">
+	<li data-icon="home"><a href="#dashboard">Αρχική</a></li>
+	<li data-icon="edit"><a href="#contract">Προτεινόμενα Συμβόλαια</a></li>
+    <li data-icon="star"><a href="#rewards">Available Rewards</a><span class="ui-li-count" id="rewardsCount"></span></li>
+    <li data-icon="info"><a href="#sunmboules">Συμβουλές</a></li>
+	<li data-icon="mail"><a href="#contact">Επικοινωνία</a></li>
+	<li data-icon="power"><a href="#" onclick="logout()">Έξοδος</a></li>
+</ul>
+		</div><!-- TELOS MENU -->
+		
+		</div>
+<!-- TELOS CONTACT VIEW -->
+
 </body>
 
 </html>
