@@ -21,6 +21,10 @@ var app = (function(){
 			case 'month_selection_changed':
 				_renderScoresForMonth(_getSelectedMonthNum());
 				break;
+			case 'month_selection_current_month':
+				_selectCurrentMonth();
+				_renderScoresForMonth(_getSelectedMonthNum());
+				break;
 			case 'user-detail-modal-show':
 				_renderUserDetailModal(data);
 				break;
@@ -54,6 +58,10 @@ var app = (function(){
 		
 		$('#time_period select.select-month').on('change', function(){
 			trigger('month_selection_changed');
+		});
+		
+		$('#goToCurrentMonth').on('click', function(){
+			trigger('month_selection_current_month');
 		});
 	}
 	
@@ -176,6 +184,11 @@ var app = (function(){
 	function _getSelectedMonthNum(){
 		var mo = $('#time_period').find('select.select-month option:selected').val();
 		return _monthToNumber(mo);
+	}
+	
+	function _selectCurrentMonth(){
+		var cmonth = _numberToMonth(_getCurrentMonthNum());
+		$('#time_period select.select-month').val(cmonth);
 	}
 	
 	return {
