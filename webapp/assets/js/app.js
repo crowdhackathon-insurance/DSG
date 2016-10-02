@@ -214,9 +214,9 @@ var app = (function(){
 		   }
 		}
 		
-		var ctx = document.getElementById("barsChart");
-		var barChart = new Chart(ctx, {
-			type: 'bar',
+		var ctx = document.getElementById("lineChart");
+		var lineChart = new Chart(ctx, {
+			type: 'line',
 			data: {
 				labels: labels,
 				datasets: [{
@@ -224,13 +224,6 @@ var app = (function(){
 					data: gen_scores,
 					backgroundColor: "rgba(75,192,192,0.4)",
 					borderColor: "rgba(75,192,192,1)",
-					borderWidth: 1
-				},
-				{
-					label: 'Stability',
-					data: stability,
-					backgroundColor: "rgba(5,3,192,0.4)",
-					borderColor: "rgba(15,3,192,1)",
 					borderWidth: 1
 				}]
 			},
