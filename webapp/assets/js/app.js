@@ -15,8 +15,11 @@ var app = (function(){
 				api.getAllScores();
 				break;
 			case 'scores-returned':
-				_renderScores(data);
 				_saveScores(data);
+				_renderScoresForMonth(_getSelectedMonthNum());
+				break;
+			case 'month_selection_changed':
+				_renderScoresForMonth(_getSelectedMonthNum());
 				break;
 			case 'user-detail-modal-show':
 				_renderUserDetailModal(data);
@@ -40,12 +43,17 @@ var app = (function(){
 		$('#btn_login').on('click', function(){
 			trigger('login-submit');
 		});
+		
 		$('#mdl_anal').on('show.bs.modal', function(e){
 			var data = {
 				username: $(e.relatedTarget).closest('tr').data('score-user')
 			};
 			
 			trigger('user-detail-modal-show', data);
+		});
+		
+		$('#time_period select.select-month').on('change', function(){
+			trigger('month_selection_changed');
 		});
 	}
 	
@@ -57,27 +65,33 @@ var app = (function(){
 		});
 	}
 	
-	function _renderScores(data){
+	function _renderScoresForMonth(month){
 		var tr = '',
 			tbody = $('#userlist tbody'),
 			// currentMonth = new Date().getMonth()+1;
 			currentMonth = 2;	//static till we get actual data in the database
 			
-		tbody.html('');
 		
-		for( var i=0,n = data[currentMonth].length; i<n; i++ ){
-			tr = 
-				'<tr data-score-user="'+data[currentMonth][i].username+'">\
-					<td class="'+(i<3?'text-bold':'')+'">'+getTextPlace(i+1)+'</td>\
-					<td>'+data[currentMonth][i].username+'</td>\
-					<td>'+data[currentMonth][i].gen_score+'%</td>\
-					<td class="action">\
-						<button type="button" class="btn-anal btn btn-default btn-block" data-toggle="modal" data-target="#mdl_anal">Details</button>\
-					</td>\
-				</tr>';
-			
-			tbody.append(tr);
+		tbody.hide();
+		if(allScoreData[month]){
+			tbody.html('');
+			for( var i=0,n = allScoreData[month].length; i<n; i++ ){
+				tr = 
+					'<tr data-score-user="'+allScoreData[month][i].username+'">\
+						<td class="'+(i<3?'text-bold':'')+'">'+getTextPlace(i+1)+'</td>\
+						<td>'+allScoreData[month][i].username+'</td>\
+						<td>'+allScoreData[month][i].gen_score+'%</td>\
+						<td class="action">\
+							<button type="button" class="btn-anal btn btn-default btn-block" data-toggle="modal" data-target="#mdl_anal">Details</button>\
+						</td>\
+					</tr>';
+				
+				tbody.append(tr);
+			}
+		} else {
+			tbody.html('<tr><td  colspan=4 class="text-center">No records for this month :(</td></tr>');
 		}
+		tbody.fadeIn(666);
 	}
 	
 	function _renderUserDetailModal(data){
@@ -150,6 +164,15 @@ var app = (function(){
 	function _numberToMonth(num){
 		
 		return _monthNames[num-1];
+	}
+	
+	function _getCurrentMonthNum(){
+		return (new Date().getMonth()+1);
+	}
+	
+	function _getSelectedMonthNum(){
+		var mo = $('#time_period').find('select.select-month option:selected').val();
+		return _monthToNumber(mo);
 	}
 	
 	return {
