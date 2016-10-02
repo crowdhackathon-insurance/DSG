@@ -86,3 +86,14 @@ body{
 .text-insurance{
   color: rgba(52, 52, 52, 1);
 }
+.appName{
+	font-size: 60px;
+	font-family: 'Righteous', cursive;
+}
+.appName2{
+	font-family: 'Righteous', cursive;
+}
+.slogan{
+	margin-top: -10px;
+	font-family: 'Indie Flower', cursive;
+}

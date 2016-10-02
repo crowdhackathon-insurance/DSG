@@ -47,7 +47,7 @@ var app = (function(){
 		api.init(apiOptions);
 		
 		_eventListeners();
-		trigger('login-submit');	//temp login override
+		// trigger('login-submit');	//temp login override
 	}
 
 	function _eventListeners(){
