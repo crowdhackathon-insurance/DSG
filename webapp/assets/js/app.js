@@ -139,6 +139,19 @@ var app = (function(){
 		}
 	}
 	
+	var _monthNames = ["January", "February", "March", "April", "May", "June",
+	  "July", "August", "September", "October", "November", "December"
+	];
+	
+	function _monthToNumber(month){
+		return _monthNames.indexOf(month)+1;
+	}
+	
+	function _numberToMonth(num){
+		
+		return _monthNames[num-1];
+	}
+	
 	return {
 		trigger: trigger,
 		init: init
