@@ -1,55 +1,98 @@
 %% ========== Clear the data from anomalies ==========
+% crowdhackathon - DSG 
 % raw data contains some noise, and paranormal values (lol, 45k seconds for
 % a trip)
  
-indx_to_del = find(commasepavalues(:,3) > 10801 | commasepavalues(:,6) > 10801 | ...            % If maxSpeed, or avgSpeed, or duration, or idleDuration,
-commasepavalues(:,7) > 170 | commasepavalues(:,8) > 1 | commasepavalues(:,8) <= 0);          % or score are out of logical ranges, clear em and get index.
+% If maxSpeed, or avgSpeed, or duration, or idleDuration,
+% or score are out of logical ranges, clear em and get index.
+indx_to_del = find(commasepavalues(:,3) > 10801 | commasepavalues(:,6) > 10801 | ...    
+commasepavalues(:,7) > 170 | commasepavalues(:,8) > 1 | commasepavalues(:,8) <= 0);  
 
-indx_to_del = sort(indx_to_del);                                                                                        % Sort values asc. Just formal
-buff_matrix = commasepavalues;                                                                                       % buffer to keep raw data as well, might need em
+% Sort values asc. Just formal
+indx_to_del = sort(indx_to_del);                                                                               
+% buffer to keep raw data as well, might need em
+buff_matrix = commasepavalues;
 buff_matrix(indx_to_del, :) = [];
-clean_data = buff_matrix;                                                                                                % clean_data is what we want
+% clean_data is what we want
+clean_data = buff_matrix;				
+% remove timestamps as well
+startTime(indx_to_del) = [];															
+stopTime(indx_to_del) = [];
 
-startTime(indx_to_del) = [];                                                                                             % remove timestamps as well
-stopTime(indx_to_del) = [];                                                                                           % remove timestamps as well
-
-save cleaned_data.mat                                                                                                           %save the workspace
-
+% to string to search for months  ---------------------
 for i = 1:length(startTime)
-start_string(i,1:5) = char(startTime(i));
+    start_string(i,1:5) = char(startTime(i));
 end
 get_months = str2num(start_string(:,4:end));
 months_to_scan = unique(get_months);
+% ---------------------------------------------------
 clean_data(:,end+1) = get_months;
+% get drivers ids
+driver_ids = unique(clean_data(:,2));
+% sort accord. to month
+clean_sorted = sortrows(clean_data,size(clean_data,2));
 
-% clean_data(find(clean_data(:,end) == months_to_scan(1)),1:end-1);
-driver_ids = unique(clean_data(:,2));%get drivers ids
-clean_sorted = sortrows(clean_data,size(clean_data,2));%sort accord. to month
+% bundle to cells  ------------------------------------
 for i = 1:length(driver_ids)
     driver{i} = clean_sorted(clean_sorted(:,2) == driver_ids(i),:);
 end
+% ---------------------------------------------------
 
-for i = 1:length(driver_ids)
+save cleaned_data.mat
+
+%% ========== Feature Extraction ==========
+
+% score_diff is the diff from accel. scores. Indicates consistency
+% dur_ratio is the active driving time
+% score is extracted from speeding, braking, acceleration and idling
+for i = 1:length(driver_ids) 														
     for j = 1:length(months_to_scan)
-        score_diff(i,j) = std(diff(driver{i}(find(driver{i}(:,9) == months_to_scan(j)),8)));
-        dur_ratio(i,j) = (mean(driver{i}(find(driver{i}(:,9) == months_to_scan(j)),3)) - ...
-                            mean(driver{i}(find(driver{i}(:,9) == months_to_scan(j)),6)))/  ...
-                            mean(driver{i}(find(driver{i}(:,9) == months_to_scan(j)),3));
+
+        scores(i,j) = mean(driver{i}(driver{i}(:,9) ==	months_to_scan(j),8));
+        std_scores(i,j) = std(driver{i}(driver{i}(:,9) ==	months_to_scan(j),8));
+        score_diff(i,j) = std(diff(driver{i}(driver{i}(:,9) == months_to_scan(j),8))); 
+        dur_ratio(i,j) = (mean(driver{i}(driver{i}(:,9) == months_to_scan(j),3)) - ...
+                             mean(driver{i}(driver{i}(:,9) == months_to_scan(j),6)))/  ...
+                             mean(driver{i}(driver{i}(:,9) == months_to_scan(j),3));
+        range(i,j) = mean((max(driver{i}(driver{i}(:,9) == months_to_scan(j),8)) - ...
+                             min(driver{i}(driver{i}(:,9) == months_to_scan(j),8))));            
     end
 end
+% ---------------------------------------------------
+% normalize values for classifier or next level of analysis
+normz_diff = mat2gray(score_diff,[0 1]);
+normz_score = mat2gray(scores,[0 1]);
+normz_ratio = mat2gray(dur_ratio,[0 1]);
+normz_std_scores = mat2gray(std_scores,[0 1]);
+normz_range = mat2gray(range,[0 1]);
+% ---------------------------------------------------
+% save the workspace
+save cleaned_data_with_features.mat
+% % naive but worx
+% pad_metadata(24,9) = zeros;
+% pad_metadata(end, 1:end-1) = months_to_scan;
+% pad_metadata(1:end-1, end) = driver_ids;
+% % ikr
+% normz_diff(end+1, :) = pad_metadata(end,1:end-1);
+% normz_diff(:, end+1) = pad_metadata(:,end);
+% normz_score(end+1, :) = pad_metadata(end,1:end-1);
+% normz_score(:, end+1) = pad_metadata(:,end);
+% normz_ratio(end+1, :) = pad_metadata(end,1:end-1);
+% normz_ratio(:, end+1) = pad_metadata(:,end);
+% normz_std_scores(end+1, :) = pad_metadata(end,1:end-1);
+% normz_std_scores(:, end+1) = pad_metadata(:,end);
+% normz_range(end+1, :) = pad_metadata(end,1:end-1);
+% normz_range(:, end+1) = pad_metadata(:,end);
+% fml but worked, will use matrices on next version
+clearvars -except normz_diff normz_score normz_ratio normz_range driver_ids months_to_scan
+save __feats_only__.mat
 
-save cleaned_data.mat%save the workspace
+final_to_out = [month{1}; month{2}; month{3}; month{4}; month{5}; month{6}; month{7}; month{8}];
 
-%% create driver cells
-
-get_indices = unique(clean_data(:,2)); % get unique drivers
-for i = 1:length(get_indices) % for length of unique drivers
-    driver{i} = clean_data(clean_data(:,2) == get_indices(i),3:end);
-    mean_values(i,:) = mean(driver{i}(:,1:end));
-    lengths(i) = length(driver{i});
+k = 1;
+for i = 1:23:length(final_to_out)
+final_to_out(i:i+23,6) = months_to_scan(k);
+k = k+1;
 end
 
-mean_for_models = mean(mean_values);
-mean_trip_no = round(mean(lengths));
-percentage_over_mean = (mean_for_models/100)
-
+save __feats_only__.mat
