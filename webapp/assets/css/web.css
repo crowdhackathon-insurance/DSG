@@ -60,6 +60,10 @@ body{
 .status-declined{
   background-color: rgba(255, 156, 153, 1);
 }
+.table-title{
+  font-size: 30px;
+  font-weight: 700;
+}
 .text-bold{
   font-weight: bold;
 }
