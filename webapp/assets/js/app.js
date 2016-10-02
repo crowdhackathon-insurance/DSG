@@ -116,9 +116,9 @@ var app = (function(){
 				tr =
 					'<tr class="status-'+(up?'improved':'declined')+'">\
 						<td>'+userScores[i].month+'</td>\
-						<td>'+userScores[i].placeholder1+'</td>\
-						<td>'+userScores[i].placeholder2+'</td>\
-						<td>'+userScores[i].placeholder3+'</td>\
+						<td>'+userScores[i].stability+'</td>\
+						<td>'+userScores[i].score_range+'</td>\
+						<td>'+userScores[i].active_time+'</td>\
 						<td class="text-bold">'+userScores[i].gen_score+'%</td>\
 						<td><i class="fa fa-sort-'+(up?'asc':'desc')+'" aria-hidden="true"></i></td>\
 					  </tr>';
@@ -126,9 +126,9 @@ var app = (function(){
 				tr =
 					'<tr>\
 						<td>'+userScores[i].month+'</td>\
-						<td>'+userScores[i].placeholder1+'</td>\
-						<td>'+userScores[i].placeholder2+'</td>\
-						<td>'+userScores[i].placeholder3+'</td>\
+						<td>'+userScores[i].stability+'</td>\
+						<td>'+userScores[i].score_range+'</td>\
+						<td>'+userScores[i].active_time+'</td>\
 						<td class="text-bold">'+userScores[i].gen_score+'%</td>\
 						<td><i class="fa fa-minus" aria-hidden="true"></i></td>\
 					  </tr>';
