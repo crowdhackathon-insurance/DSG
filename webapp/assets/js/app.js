@@ -108,29 +108,32 @@ var app = (function(){
 		}
 		
 		tbody.html('');
+		$('#mdl_anal #user-name').text(userScores[0].username);
 		
 		for( var i=userScores.length-1; i>-1; i-- ){
 			var up, tr;
 			if(i!=0){
 				up = userScores[i-1].gen_score-userScores[i].gen_score<0?true:false;
 				tr =
-					'<tr class="status-'+(up?'improved':'declined')+'">\
-						<td>'+userScores[i].month+'</td>\
+					'<tr class="text-center">\
+						<td>'+_numberToMonth(userScores[i].month)+'</td>\
 						<td>'+userScores[i].stability+'</td>\
 						<td>'+userScores[i].score_range+'</td>\
 						<td>'+userScores[i].active_time+'</td>\
+						<td>'+userScores[i].score+'</td>\
 						<td class="text-bold">'+userScores[i].gen_score+'%</td>\
-						<td><i class="fa fa-sort-'+(up?'asc':'desc')+'" aria-hidden="true"></i></td>\
+						<td class="status-'+(up?'improved':'declined')+'"><i class="fa fa-sort-'+(up?'asc':'desc')+'" aria-hidden="true"></i></td>\
 					  </tr>';
 			} else {
 				tr =
-					'<tr>\
-						<td>'+userScores[i].month+'</td>\
+					'<tr class="text-center">\
+						<td>'+_numberToMonth(userScores[i].month)+'</td>\
 						<td>'+userScores[i].stability+'</td>\
 						<td>'+userScores[i].score_range+'</td>\
 						<td>'+userScores[i].active_time+'</td>\
+						<td>'+userScores[i].score+'</td>\
 						<td class="text-bold">'+userScores[i].gen_score+'%</td>\
-						<td><i class="fa fa-minus" aria-hidden="true"></i></td>\
+						<td></td>\
 					  </tr>';
 			}
 			tbody.append(tr);
