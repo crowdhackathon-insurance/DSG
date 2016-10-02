@@ -40,7 +40,7 @@
 	});
 
 	$app->get('/api/v1/rewards/', function () use ($app, $db){
-		$stmt = $db->prepare("SELECT `id`, `name`, `url`, `thumb`, `rank`, `claimed_by` FROM `rewards` WHERE 1");
+		$stmt = $db->prepare("SELECT `id`, `name`, `url`, `thumb`, `rank`, `claimed_by` FROM `rewards` WHERE 1 ORDER BY rank ASC");
 		$stmt->execute();
 
 		$stmt->bind_result($reward_id, $name, $url, $thumb, $rank, $claimed_by);
