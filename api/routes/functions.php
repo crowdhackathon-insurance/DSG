@@ -1,17 +1,18 @@
 <?php
 	function getUserRankObject($db, $username, $month){
-		$stmt = $db->prepare("SELECT `username`, `gen_score`,`placeholder1`,`placeholder2`,`placeholder3` FROM `raw_scores` WHERE month=? AND `username`=?");
+		$stmt = $db->prepare("SELECT `username`, `gen_score`,`stability`,`score_range`,`active_time`, `score` FROM `raw_scores` WHERE month=? AND `username`=?");
 		$stmt->bind_param('is', $month, $username);
 		$stmt->execute();		
-		$stmt->bind_result($score_username, $score_gen_score, $score_placeholder1, $score_placeholder2, $score_placeholder3);
+		$stmt->bind_result($score_username, $score_gen_score, $score_stability, $score_score_range, $score_active_time, $score_score );
 		$stmt->fetch();
 		
 		$rankObj = array();
 		$rankObj['username'] = $score_username;
 		$rankObj['gen_score'] = $score_gen_score;
-		$rankObj['placeholder1'] = $score_placeholder1;
-		$rankObj['placeholder2'] = $score_placeholder2;
-		$rankObj['placeholder3'] = $score_placeholder3;
+		$rankObj['stability'] = $score_stability;
+		$rankObj['score_range'] = $score_score_range;
+		$rankObj['active_time'] = $score_active_time;
+		$rankObj['score'] = $score_score;
 		
 		$stmt->close();
 		

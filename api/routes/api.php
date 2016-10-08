@@ -5,30 +5,32 @@
 	*	GET ALL SCORES
 	**/
 	$app->get('/api/v1/scores/', function () use ($app, $db){
-		$stmt = $db->prepare("SELECT `id`,`username`,`year`,`month`,`gen_score`,`placeholder1`,`placeholder2`,`placeholder3` FROM `raw_scores` WHERE 1");
+		$stmt = $db->prepare("SELECT `id`,`username`,`year`,`month`,`gen_score`,`stability`,`score_range`,`active_time`, `score` FROM `raw_scores` WHERE 1");
 		$stmt->execute();
 
-		$stmt->bind_result($score_id, $score_username, $score_year, $score_month, $score_gen_score, $score_placeholder1, $score_placeholder2, $score_placeholder3);
+		$stmt->bind_result($score_id, $score_username, $score_year, $score_month, $score_gen_score, $score_stability, $score_score_range, $score_active_time, $score_score);
 
 		$response = array();
 		$response['scores'] = array();
 		while($stmt->fetch()){
 			$score = array();	//reinit the array just in case
-
+			
 			$score['id'] = $score_id;
 			$score['username'] = $score_username;
 			$score['year'] = $score_year;
 			$score['month'] = $score_month;
 			$score['gen_score'] = $score_gen_score;
-			$score['placeholder1'] = $score_placeholder1;
-			$score['placeholder2'] = $score_placeholder2;
-			$score['placeholder3'] = $score_placeholder3;
+			$score['stability'] = $score_stability;
+			$score['score_range'] = $score_score_range;
+			$score['active_time'] = $score_active_time;
+			$score['score'] = $score_score;
 
 			$response['scores'][$score_month][] = $score;
 		}
 		$stmt->close();
-		for($i=0; $i<count($response['scores']); $i++){
-			usort($response['scores'][$i+1], 'sortByScore');
+		
+		foreach($response['scores'] as $key => $monthScore){
+			usort($response['scores'][$key], 'sortByScore');
 		}
 
 		$app->response->setStatus(200);
@@ -38,7 +40,7 @@
 	});
 
 	$app->get('/api/v1/rewards/', function () use ($app, $db){
-		$stmt = $db->prepare("SELECT `id`, `name`, `url`, `thumb`, `rank`, `claimed_by` FROM `rewards` WHERE 1");
+		$stmt = $db->prepare("SELECT `id`, `name`, `url`, `thumb`, `rank`, `claimed_by` FROM `rewards` WHERE 1 ORDER BY rank ASC");
 		$stmt->execute();
 
 		$stmt->bind_result($reward_id, $name, $url, $thumb, $rank, $claimed_by);

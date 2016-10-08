@@ -1,13 +1,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Unnamed App</title>
+    <title>DaaM</title>
 
     <!-- Vendor files-->
     <link rel="stylesheet" href="vendor/css/bootstrap.min.css">
     <link rel="stylesheet" href="vendor/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-
+	<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Righteous" rel="stylesheet">
 
     <!-- App files -->
     <link rel="stylesheet" href="assets/css/web.css">
@@ -17,14 +16,15 @@
 
 
       <section id="logo" class="text-center">
-        <h1>Unnamed App</h1>
+        <h1 class="appName">DaaM Dashboard</h1>
+        <h3 class="slogan">Realise, Analyse, Monetise</h3>
       </section><!-- Logo -->
 
 
       <section id="login" class="row">
         <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3">
           <div class="jumbotron" action="post">
-            <legend>Login to Unnamed App</legend>
+            <legend class="text-center">Login to <span class="appName2">DaaM</span></legend>
             <div class="form-group">
               <label for="username">Username:</label>
               <input type="text" name="username" class="form-control" placeholder="Please enter your username">
@@ -48,17 +48,17 @@
             <thead>
               <tr>
                 <th colspan="4" class="text-center bg-insurance table-title">
-                  Users Table
+                  Ranking
                 </th>
               </tr>
               <tr>
-                <th>Rank</th>
-                <th>Name</th>
-                <th>Score</th>
-                <th>Actions</th>
+                <th class="text-center">Rank</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Score</th>
+                <th class="text-center">Actions</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="text-center">
       				<tr>
       					<td class="text-center" colspan=4>
       						<i class="fa fa-spinner fa-spin fa-fw"></i> Loading
@@ -73,10 +73,10 @@
           <div id="time_period" class="panel">
             <div class="info bg-insurance">
               <div class="text-insurance"><strong>Current Period</strong></div>
-              <select class="form-control" name="period_year">
+              <select  class="select-year form-control" name="period_year">
                 <option>2016</option>
               </select>
-              <select class="form-control" name="period_month">
+              <select class="select-month form-control" name="period_month">
                 <option>January</option>
                 <option>February</option>
                 <option>March</option>
@@ -87,14 +87,13 @@
                 <option>August</option>
                 <option>September</option>
                 <option>October</option>
-                <option>August</option>
                 <option>November</option>
                 <option>December</option>
               </select>
             </div><!-- .info -->
 
             <div class="button">
-              <a role="button" class="btn btn-default btn-lg btn-block">
+              <a id="goToCurrentMonth" role="button" class="btn btn-default btn-lg btn-block">
                 Go to Current Month
               </a>
             </div><!-- .button -->
@@ -140,56 +139,30 @@
               <a href="#"><i class="fa fa-3x fa-envelope" aria-hidden="true"></i></a>
             </div>
           </div>
+			<div class="row">
+				<div class="col-xs-6">
+					<canvas id="lineChart"></canvas>
+				</div>
+				<div class="col-xs-6">
+					<canvas id="polarChart"></canvas>
+				</div>
+			</div>
           <div class="row">
-            <div class="col-md-5">
-              <iframe class="chart" src="vendor/d3/bar-chart/index.html" scrolling="no"></iframe>
-            </div>
-            <div class="col-md-4">
-              <h1 class="text-right">Current Score</h1>
-              <h4 class="text-right">This driver drives balanced, but speeds up</h4>
-            </div>
-            <div class="col-md-3">
-              <iframe class="score" src="vendor/d3/aster/index.html" scrolling="no"></iframe>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
               <table class="table table-bordered table-condensed">
                 <thead>
                   <tr>
-                    <th>Month</th>
-                    <th>Placeholder1</th>
-                    <th>Placeholder2</th>
-                    <th>Placeholder3</th>
-                    <th>Score</th>
+                    <th class="text-center">Month</th>
+                    <th class="text-center">Stability</th>
+                    <th class="text-center">Score Range</th>
+                    <th class="text-center">Active Time</th>
+                    <th class="text-center">Smoothness</th>
+                    <th class="text-center">General score</th>
                   </tr>
                 </thead>
                 <tbody>
                 </tbody>
               </table>
-            </div>
-            <div class="col-md-4">
-              <div class="panel">
-                <div class="bg-insurance info">
-                  <strong>Claimed Rewards</strong>: 1
-                </div>
-                <div class="button">
-                  <a role="button" class="btn btn-default btn-lg btn-block">
-                    View Rewards
-                  </a>
-                </div>
-              </div>
-
-              <div class="panel">
-                <div class="bg-danger info">
-                  <strong>Support Requests</strong>: 1
-                </div>
-                <div class="button">
-                  <a role="button" class="btn btn-default btn-lg btn-block">
-                    View Requests
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -380,6 +353,8 @@
   <script type="text/javascript" src="vendor/js/jquery.min.js"></script>
   <script type="text/javascript" src="vendor/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="vendor/js/d3.min.js"></script>
+  
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
 
   <!-- App Scripts -->
   <script type="text/javascript" src="assets/js/app.js"></script>
